@@ -553,7 +553,7 @@ func (auth *Auth) PayloadHash(contentType string) hash.Hash {
 // ValidHash writes the final newline to h and checks if it matches auth.Hash.
 func (auth *Auth) ValidHash(h hash.Hash) bool {
 	h.Write([]byte("\n"))
-	return bytes.Equal(h.Sum(nil), auth.Hash)
+	return hmac.Equal(h.Sum(nil), auth.Hash)
 }
 
 // SetHash writes the final newline to h and sets auth.Hash to the sum. This is
