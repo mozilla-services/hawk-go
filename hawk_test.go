@@ -1,4 +1,4 @@
-package hawk
+package hawk /* import "gozilla.io/hawk" */
 
 import (
 	"crypto/sha1"

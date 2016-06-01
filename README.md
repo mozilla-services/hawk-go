@@ -8,5 +8,5 @@ authentication scheme in Go.
 ## Installation
 
 ```text
-go get github.com/mozilla-services/hawk-go
+go get gozilla.io/hawk
 ```
