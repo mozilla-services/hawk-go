@@ -1,5 +1,6 @@
 GO = GO15VENDOREXPERIMENT=1 go
 GOLINT = golint
+PROJECT = gozilla.io/hawk
 
 all: test vet generate
 
@@ -7,13 +8,13 @@ tag: all
 	git tag -s $(TAGVER) -a -m "$(TAGMSG)"
 
 lint:
-	$(GOLINT) github.com/mozilla-services/hawk-go
+	$(GOLINT) $(PROJECT)
 
 vet:
-	$(GO) vet github.com/mozilla-services/hawk-go
+	$(GO) vet $(PROJECT)
 
 test:
-	$(GO) test -covermode=count -coverprofile=coverage.out github.com/mozilla-services/hawk-go
+	$(GO) test -covermode=count -coverprofile=coverage.out $(PROJECT)
 
 showcoverage: test
 	$(GO) tool cover -html=coverage.out
