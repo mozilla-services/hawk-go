@@ -1,6 +1,6 @@
 // Package hawk implements the Hawk HTTP authentication scheme.
 
-package hawk /* import "gozilla.io/hawk" */
+package hawk /* import "go.mozilla.org/hawk" */
 
 import (
 	"bytes"

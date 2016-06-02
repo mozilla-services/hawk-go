@@ -1,6 +1,6 @@
 GO = GO15VENDOREXPERIMENT=1 go
 GOLINT = golint
-PROJECT = gozilla.io/hawk
+PROJECT = go.mozilla.org/hawk
 
 all: test vet generate
 
