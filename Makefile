@@ -2,6 +2,12 @@ GO = GO15VENDOREXPERIMENT=1 go
 GOLINT = golint
 PROJECT = go.mozilla.org/hawk
 
+install-go-mod-upgrade:
+	go get -u github.com/oligot/go-mod-upgrade
+
+upgrade:
+	go-mod-upgrade
+
 all: test vet generate
 
 tag: all
