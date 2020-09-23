@@ -276,7 +276,7 @@ func extractReqHostPort(req *http.Request) (host string, port string) {
 }
 
 func extractRequestURI(req *http.Request) string {
-	uri := req.URL.Path
+	uri := req.URL.EscapedPath()
 	if req.URL.RawQuery != "" {
 		uri += "?" + req.URL.RawQuery
 	}
