@@ -297,7 +297,7 @@ func NewRequestAuth(req *http.Request, creds *Credentials, tsOffset time.Duratio
 	return auth
 }
 
-// NewRequestAuth builds a client Auth based on uri and creds. tsOffset will be
+// NewURLAuth builds a client Auth based on uri and creds. tsOffset will be
 // applied to Now when setting the timestamp.
 func NewURLAuth(uri string, creds *Credentials, tsOffset time.Duration) (*Auth, error) {
 	u, err := url.Parse(uri)
@@ -677,7 +677,6 @@ func (auth *Auth) UpdateOffset(header string) (time.Duration, error) {
 	var err error
 	var ts time.Time
 	var tsm []byte
-	var errMsg string
 
 	for _, match := range matches {
 		switch match[1] {
@@ -692,13 +691,7 @@ func (auth *Auth) UpdateOffset(header string) (time.Duration, error) {
 			if err != nil {
 				return 0, AuthFormatError{"tsm", "malformed base64 encoding"}
 			}
-		case "error":
-			errMsg = match[2]
 		}
-	}
-
-	if errMsg != "Stale timestamp" {
-		return 0, AuthFormatError{"error", "missing or unknown"}
 	}
 
 	if !hmac.Equal(tsm, auth.tsMac(strconv.FormatInt(ts.Unix(), 10))) {
