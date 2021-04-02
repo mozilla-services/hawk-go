@@ -277,6 +277,16 @@ func (s *HawkSuite) TestUpdateOffset(c *C) {
 	c.Assert(auth.Nonce, HasLen, 8)
 }
 
+func (s *HawkSuite) TestExtractRequestURI(c *C) {
+	req, err := http.NewRequest("GET", "https://example.com/foo%2Fbar?%66oo=1&%62ar=2", nil)
+	c.Assert(err, IsNil)
+	reqURI := extractRequestURI(req)
+	reqHost, reqPort := extractReqHostPort(req)
+	c.Assert(reqURI, Equals, "/foo%2Fbar?%66oo=1&%62ar=2")
+	c.Assert(reqHost, Equals, "example.com")
+	c.Assert(reqPort, Equals, "443")
+}
+
 var header = `Hawk id="dh37fgj492je", ts="1353832234", nonce="j4h3g2", ext="some-app-ext-data", mac="6R4rV5iE+NPoym+WwjeHzjAGXUtLNIxmo1vpMofpLAE="`
 
 func BenchmarkRegexParser(b *testing.B) {
